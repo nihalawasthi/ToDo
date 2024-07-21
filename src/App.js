@@ -12,7 +12,7 @@ import {
 import { useState, useRef, useEffect } from 'react';
 import { MoonStars, Sun, Trash } from 'tabler-icons-react';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
-import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks'; // Removed 'useColorScheme'
 
 export default function App() {
 	const [tasks, setTasks] = useState([]);
