@@ -11,19 +11,13 @@ import {
 } from '@mantine/core';
 import { useState, useRef, useEffect } from 'react';
 import { MoonStars, Sun, Trash } from 'tabler-icons-react';
-
-import {
-	MantineProvider,
-	ColorSchemeProvider,
-} from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
-import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
+import { useColorScheme, useHotkeys, useLocalStorage } from '@mantine/hooks';
 
 export default function App() {
 	const [tasks, setTasks] = useState([]);
 	const [opened, setOpened] = useState(false);
 
-	//const preferredColorScheme = useColorScheme();
 	const [colorScheme, setColorScheme] = useLocalStorage({
 		key: 'mantine-color-scheme',
 		defaultValue: 'light',
@@ -57,22 +51,16 @@ export default function App() {
 		]);
 	}
 
-
 	function deleteTask(index) {
-		var clonedTasks = [...tasks];
-
+		const clonedTasks = [...tasks];
 		clonedTasks.splice(index, 1);
-
 		setTasks(clonedTasks);
-
 		saveTasks([...clonedTasks]);
 	}
 
 	function loadTasks() {
-		let loadedTasks = localStorage.getItem('tasks');
-
-		let tasks = JSON.parse(loadedTasks);
-
+		const loadedTasks = localStorage.getItem('tasks');
+		const tasks = JSON.parse(loadedTasks);
 		if (tasks) {
 			setTasks(tasks);
 		}
@@ -89,7 +77,6 @@ export default function App() {
 		setTasks(updatedTasks);
 		saveTasks(updatedTasks);
 	}
-
 
 	useEffect(() => {
 		loadTasks();
@@ -205,6 +192,7 @@ export default function App() {
 										</Card>
 									);
 								}
+								return null; // Ensure we return null if task.title is not present
 							})
 						) : (
 							<Text size={'lg'} mt={'md'} color={'dimmed'}>
